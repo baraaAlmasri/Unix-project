@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            min-height: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Dictionary App</h2>
+
+    <input type="text" id="wordInput" placeholder="Enter a word...">
+
+    <button onclick="searchWord()">Search</button>
+
+    <div class="result" id="resultBox"></div>
+</div>
+
+<script>
+    function searchWord() {
+        let word = document.getElementById("wordInput").value;
+
+        if(word === "") {
+            document.getElementById("resultBox").innerHTML = "Please enter a word.";
+            return;
+        }
+
+        // Later this will call PHP (Step 4 backend)
+        fetch("search.php?word=" + word)
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("resultBox").innerHTML = data;
+            });
+    }
+</script>
+
+</body>
+</html>
